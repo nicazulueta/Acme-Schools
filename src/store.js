@@ -26,6 +26,9 @@ const studentsReducer = (state = initialState, action)=> {
       return {...state, students: action.students};
     case CREATE_STUDENT:
       return { ...state, students: [...state.students, action.student]};
+    case DESTROY_STUDENT:
+      const newStudents = state.students.filter(student => student.id !== action.studentId);
+      return {...state, students: newStudents}
     default:
       return state
   }
@@ -72,13 +75,20 @@ const getStudents = ()=> {
 
 const createStudent = student => {
   return async(dispatch) => {
-    console.log(student)
     const res = await axios.post('/api/students', student);
     dispatch(_createStudent(res.data));
+  };
+};
+
+const destroyStudent = studentId => {
+  console.log(studentId)
+  return async(dispatch) => {
+    await axios.delete('/api/students/', studentId);
+    dispatch(_destroyStudent(studentId));
   };
 };
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
-export { getSchools, getStudents, createStudent };
+export { getSchools, getStudents, createStudent, destroyStudent };

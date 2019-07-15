@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { destroyStudent } from './store'
 
 const Students = (students) => {
   return (
@@ -14,7 +15,7 @@ const Students = (students) => {
               <option>Not Enrolled</option>
             </select>
           <br />
-          <button>Destroy Student</button>
+          <button onClick={() => destroyStudent(student.id)}>Destroy Student</button>
         </li>)
       }
     </ul>
@@ -28,6 +29,14 @@ const mapStateToProps = ({ schools, students })=> {
   };
 };
 
-export default connect(mapStateToProps)(Students);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteStudent: student => dispatch(destroyStudent(student.id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Students);
+
+
 
 

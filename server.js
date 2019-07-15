@@ -31,10 +31,22 @@ app.post('/api/students', async (req, res, next) => {
     try {
         const createStudent = await Student.create(req.body)
         res.send(createStudent);
-    } catch (error) {
+    } catch (err) {
         console.error(err);
     }
 });
+
+app.delete('/api/students/:id', async (req, res, next) => {
+    try {
+      await Student.destroy({
+        where: {
+          id: req.params.id
+        }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  });
 
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'index.html'))
