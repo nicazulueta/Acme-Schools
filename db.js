@@ -31,7 +31,14 @@ const schoolData = [
 const studentData = [
   {firstName: 'Moe', lastName: 'Foo', email: 'moe.f@student.com', gpa: '3'},
   {firstName: 'Larry', lastName: 'Bar', email: 'larry.b@student.com', gpa: '3.5'},
-  {firstName: 'Curly', lastName: 'Bazz', email: 'curly.b@student.com', gpa: '3.7'}];
+  {firstName: 'Curly', lastName: 'Bazz', email: 'curly.b@student.com', gpa: '3.7'},
+  {firstName: 'Debra', lastName: 'Nightingale', email: 'brenda.n@student.com', gpa: '2.9'},
+  {firstName: 'Steven', lastName: 'Lamarche', email: 'steven.s@student.com', gpa: '3.9'},
+  {firstName: 'Greg', lastName: 'Smith', email: 'greg.s@student.com', gpa: '4.0'},
+  {firstName: 'Kevin', lastName: 'Maberry', email: 'kevin.m@student.com', gpa: '2.5'},
+  {firstName: 'Lisa', lastName: 'Delvalle', email: 'lisa.d@student.com', gpa: '3.3'},
+  {firstName: 'Sarah', lastName: 'Pomerleau', email: 'sarah.p@student.com', gpa: '3.66'},
+  {firstName: 'Rhonda', lastName: 'Demaria', email: 'rhonda.d@student.com', gpa: '2.8'}];
 
 const School = conn.define('school', {
   id: {

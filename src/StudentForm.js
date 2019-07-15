@@ -1,45 +1,58 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { createStudent } from './store'
 
 class StudentForm extends React.Component {
-  constructor () {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       firstName: '',
       lastName: '',
       email: '',
-      gpa: 1,
+      gpa: '',
       enrollAt: ''
-    }
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  };
+
+  handleChange (event) {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-  render () {
-    const { firstName, lastName, email, gpa, enrollAt } = this.state
+  handleSubmit (event) {
+    event.preventDefault();
+    this.props.createStudent(this.state);
+  }
+
+  render() {
     return (
       <div id='form'>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label>
             First Name
-            <input type='text' name='firstName' value={firstName} />
+            <input type='text' name='firstName' value={this.state.firstName} onChange={this.handleChange} />
           </label>
           <br />
           <label>
             Last Name
-            <input type='text' name='lastName' value={lastName} />
+            <input type='text' name='lastName' value={this.state.lastName} onChange={this.handleChange} />
           </label>
           <br />
           <label>
             Email
-            <input type='text' name='email' value={email} />
+            <input type='text' name='email' value={this.state.email} onChange={this.handleChange} />
           </label>
           <br />
           <label>
             GPA
-            <input type='text' name='GPA' value={gpa} />
+            <input type='text' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
           </label>
           <br />
           <label>
             Enroll at
-            <select name='enrollAt'>
+            <select name='enrollAt' value={this.state.enrollAt} onChange={this.handleChange}>
               <option>Not Enrolled</option>
             </select>
           </label>
@@ -51,4 +64,4 @@ class StudentForm extends React.Component {
   }
 }
 
-export default StudentForm
+export default connect( null, { createStudent } )(StudentForm)

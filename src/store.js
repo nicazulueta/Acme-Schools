@@ -9,6 +9,8 @@ const initialState = {
 
 const GET_SCHOOLS = 'GET_SCHOOLS';
 const GET_STUDENTS = 'GET_STUDENTS';
+const CREATE_STUDENT = 'CREATE_STUDENT';
+const DESTROY_STUDENT = 'DESTROY_STUDENT';
 
 const schoolsReducer = (state = initialState, action)=> {
   switch(action.type){
@@ -21,7 +23,9 @@ const schoolsReducer = (state = initialState, action)=> {
 const studentsReducer = (state = initialState, action)=> {
   switch(action.type){
     case GET_STUDENTS:
-      return {...state, students: [...state.students, ...action.students]};
+      return {...state, students: action.students};
+    case CREATE_STUDENT:
+      return { ...state, students: [...state.students, action.student]};
     default:
       return state
   }
@@ -42,6 +46,16 @@ const _getStudents = (students)=> ({
   students
 });
 
+const _createStudent = (student) => ({
+  type: CREATE_STUDENT,
+  student
+})
+
+const _destroyStudent = (studentId) => ({
+  type: DESTROY_STUDENT,
+  studentId
+})
+
 const getSchools = ()=> {
   return async(dispatch)=> {
     const res = await axios.get('/api/schools');
@@ -56,7 +70,15 @@ const getStudents = ()=> {
   };
 };
 
+const createStudent = student => {
+  return async(dispatch) => {
+    console.log(student)
+    const res = await axios.post('/api/students', student);
+    dispatch(_createStudent(res.data));
+  };
+};
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
-export { getSchools, getStudents };
+export { getSchools, getStudents, createStudent };
