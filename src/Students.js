@@ -1,13 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Students = ({students}) => {
-  console.log(students)
+const Students = (students) => {
+  console.log(students.students.students)
   return (
     <ul>
       {
-        students.map( student => <li key={ student.id }>
-          { student.name }
+        students.students.students.map( student => <li key={ student.id }>
+          { student.firstName } {student.lastName}
+          <br />
+          GPA: {student.gpa}
+          <br />
+          <select name='enrollAt'>
+              <option>Not Enrolled</option>
+            </select>
+          <br />
+          <button>Destroy Student</button>
         </li>)
       }
     </ul>

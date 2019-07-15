@@ -21,10 +21,10 @@ const schoolsReducer = (state = initialState, action)=> {
 const studentsReducer = (state = initialState, action)=> {
   switch(action.type){
     case GET_STUDENTS:
-      console.log(action)
       return {...state, students: [...state.students, ...action.students]};
+    default:
+      return state
   }
-  return state;
 };
 
 const reducer = combineReducers({
