@@ -1,13 +1,26 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 
-const Students = () => {
-  return(
+const Students = ({students}) => {
+  console.log(students)
+  return (
     <ul>
-      <li>Hello</li>
+      {
+        students.map( student => <li key={ student.id }>
+          { student.name }
+        </li>)
+      }
     </ul>
-  )
-}
+  );
+};
 
-export default Students
+const mapStateToProps = ({ schools, students })=> {
+  return {
+    schools,
+    students
+  };
+};
+
+export default connect(mapStateToProps)(Students);
 
 

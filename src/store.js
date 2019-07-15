@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import axios from 'axios'
 
@@ -13,7 +13,7 @@ const GET_STUDENTS = 'GET_STUDENTS';
 const schoolsReducer = (state = initialState, action)=> {
   switch(action.type){
     case GET_SCHOOLS:
-      return action.schools;
+      return {...state, schools: action.schools};
   }
   return state;
 };
@@ -21,7 +21,8 @@ const schoolsReducer = (state = initialState, action)=> {
 const studentsReducer = (state = initialState, action)=> {
   switch(action.type){
     case GET_STUDENTS:
-      return action.students;
+      console.log(action)
+      return {...state, students: [...state.students, ...action.students]};
   }
   return state;
 };

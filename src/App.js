@@ -1,16 +1,19 @@
 import React from 'react'
-import { HashRouter, Route } from 'react-router-dom'
+import { HashRouter, Route, Link } from 'react-router-dom'
+import { getSchools, getStudents } from './store';
+import { connect } from 'react-redux';
 import Home from './Home'
 import Header from './Header'
 import StudentForm from './StudentForm'
 import Students from './Students'
 
 class App extends React.Component {
-  constructor () {
-    super();
-  };
+  componentDidMount() {
+    this.props.loadData();
+  }
 
   render() {
+    const { schools, students } = this.props;
     return (
       <div>
           <HashRouter>
@@ -24,4 +27,21 @@ class App extends React.Component {
   }
 }
 
-export default App
+const mapStateToProps = ({ schools, students})=> {
+  return {
+    schools,
+    students
+  };
+};
+
+const mapDispatchToProps = (dispatch)=> {
+  return {
+    loadData: ()=> {
+      dispatch(getSchools());
+      dispatch(getStudents());
+    }
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
