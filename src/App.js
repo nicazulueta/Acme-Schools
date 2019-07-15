@@ -6,6 +6,7 @@ import Home from './Home'
 import Header from './Header'
 import StudentForm from './StudentForm'
 import Students from './Students'
+import Schools from './Schools'
 
 class App extends React.Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ class App extends React.Component {
           <HashRouter>
             <Route path='/' component={ Header} />
             <Route path='/' component={ StudentForm } />
+            <Route exact path='/schools' component={ Schools} />
             <Route exact path='/students' component={Students} />
             <Route exact path='/' component={ Home } />
           </HashRouter>
