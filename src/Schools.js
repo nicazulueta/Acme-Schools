@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 const Schools = (schools) => {
@@ -6,7 +7,7 @@ const Schools = (schools) => {
     <ul>
       {
         schools.schools.schools.map( school => <li key={ school.id }>
-          { school.name }
+          <Link to='/schools/1'>{ school.name }</Link>
         <br />
         Student Count
         <br />
