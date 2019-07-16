@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { destroyStudent, updateStudent } from './store'
 
 const Students = ({schools, students, deleteStudent, enrollStudent}) => {
-  console.log(schools)
   return (
     <ul>
       {
@@ -12,10 +11,10 @@ const Students = ({schools, students, deleteStudent, enrollStudent}) => {
           <br />
           GPA: {student.gpa}
           <br />
-          <select name='enrollAt' defaultValue={student.enrollAt}
-              onChange={event =>
+          <select name='schoolId' defaultValue={student.schoolId}
+              onChange={(event) =>
                 enrollStudent({
-                  enrollAt: event.target.value,
+                  schoolId: event.target.value,
                   studentId: student.id
                 })
               }>

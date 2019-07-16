@@ -13,23 +13,30 @@ const CREATE_STUDENT = 'CREATE_STUDENT';
 const DESTROY_STUDENT = 'DESTROY_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT'
 
-const schoolsReducer = (state = initialState, action)=> {
-  switch(action.type){
+const schoolsReducer = (state = initialState, action) => {
+  switch (action.type) {
     case GET_SCHOOLS:
-      return {...state, schools: action.schools};
+      return { ...state, schools: action.schools };
   }
   return state;
 };
 
-const studentsReducer = (state = initialState, action)=> {
-  switch(action.type){
+const studentsReducer = (state = initialState, action) => {
+  switch (action.type) {
     case GET_STUDENTS:
-      return {...state, students: action.students};
+      return { ...state, students: action.students };
     case CREATE_STUDENT:
-      return { ...state, students: [...state.students, action.student]};
+      return { ...state, students: [...state.students, action.student] };
     case DESTROY_STUDENT:
       const newStudents = state.students.filter(student => student.id !== action.studentId);
-      return {...state, students: newStudents}
+      return { ...state, students: newStudents }
+    case UPDATE_STUDENT:
+      const updatedStudents = state.students.map(student => {
+        student.id === action.data.studentId
+          ? { ...student, schoolId: action.data.schoolId }
+          : student;
+      });
+      return state = { ...state, updatedStudents };
     default:
       return state
   }
@@ -40,12 +47,12 @@ const reducer = combineReducers({
   students: studentsReducer
 });
 
-const _getSchools = (schools)=> ({
+const _getSchools = (schools) => ({
   type: GET_SCHOOLS,
   schools
 });
 
-const _getStudents = (students)=> ({
+const _getStudents = (students) => ({
   type: GET_STUDENTS,
   students
 });
@@ -66,45 +73,39 @@ const _updateStudent = (update) => ({
 })
 
 
-const getSchools = ()=> {
-  return async(dispatch)=> {
+const getSchools = () => {
+  return async (dispatch) => {
     const res = await axios.get('/api/schools');
     return dispatch(_getSchools(res.data));
   };
 };
 
-const getStudents = ()=> {
-  return async(dispatch)=> {
+const getStudents = () => {
+  return async (dispatch) => {
     const res = await axios.get('/api/students');
     return dispatch(_getStudents(res.data));
   };
 };
 
 const createStudent = student => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     const res = await axios.post('/api/students', student);
     dispatch(_createStudent(res.data));
   };
 };
 
 const destroyStudent = studentId => {
-  console.log(studentId)
-  return async(dispatch) => {
+  return async (dispatch) => {
     await axios.delete(`/api/students/${studentId}`);
     dispatch(_destroyStudent(studentId));
   };
 };
 
-const updateStudent = update => {
+const updateStudent = (studentId, schoolId) => {
   return async (dispatch) => {
-  try {
-    const res = await axios.put( `/api/students/${update.studentId}`, { update} );
-    const _res = res.data;
-    dispatch( _updateStudent(_res));
-  } catch(err){
-      console.log(error)
+    const res = await axios.put(`/api/students/${studentId}`, schoolId);
+    dispatch(_updateStudent(res.data));
   }
-}
 }
 
 const store = createStore(reducer, applyMiddleware(thunk));
