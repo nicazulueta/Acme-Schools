@@ -43,6 +43,7 @@ app.delete(`/api/students/:id`, async (req, res, next) => {
           id: req.params.id
         }
       });
+      res.send(req.params.id)
     } catch (err) {
       console.error(err);
     }
