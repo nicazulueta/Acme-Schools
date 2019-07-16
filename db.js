@@ -80,6 +80,7 @@ const Student = conn.define('student', {
   },
   gpa: {
     type: Sequelize.STRING,
+    allowNull: false,
   }
 });
 

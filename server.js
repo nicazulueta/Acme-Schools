@@ -36,7 +36,7 @@ app.post('/api/students', async (req, res, next) => {
     }
 });
 
-app.delete('/api/students/:id', async (req, res, next) => {
+app.delete(`/api/students/:id`, async (req, res, next) => {
     try {
       await Student.destroy({
         where: {

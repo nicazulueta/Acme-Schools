@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { destroyStudent } from './store'
 
-const Students = (students) => {
+const Students = ({students, deleteStudent}) => {
   return (
     <ul>
       {
-        students.students.students.map( student => <li key={ student.id }>
+        students.students.map( student => <li key={ student.id }>
           { student.firstName } {student.lastName}
           <br />
           GPA: {student.gpa}
@@ -15,23 +15,24 @@ const Students = (students) => {
               <option>Not Enrolled</option>
             </select>
           <br />
-          <button onClick={() => destroyStudent(student.id)}>Destroy Student</button>
+          <button onClick={() => deleteStudent(student.id)}>Destroy Student</button>
         </li>)
       }
     </ul>
   );
 };
 
-const mapStateToProps = ({ schools, students })=> {
-  return {
-    schools,
-    students
-  };
+const mapStateToProps = ({ students })=> {
+    return {
+      students
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteStudent: student => dispatch(destroyStudent(student.id))
+    deleteStudent: event => {
+      dispatch(destroyStudent(event));
+    }
   }
 }
 

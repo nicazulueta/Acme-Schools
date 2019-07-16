@@ -7,7 +7,7 @@ const Schools = (schools) => {
     <ul>
       {
         schools.schools.schools.map( school => <li key={ school.id }>
-          <Link to='/schools/1'>{ school.name }</Link>
+          <Link to={`/schools/${school.id}`}>{ school.name }</Link>
         <br />
         Student Count
         <br />

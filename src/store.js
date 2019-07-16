@@ -11,6 +11,7 @@ const GET_SCHOOLS = 'GET_SCHOOLS';
 const GET_STUDENTS = 'GET_STUDENTS';
 const CREATE_STUDENT = 'CREATE_STUDENT';
 const DESTROY_STUDENT = 'DESTROY_STUDENT';
+const UPDATE_STUDENT = 'UPDATE_STUDENT'
 
 const schoolsReducer = (state = initialState, action)=> {
   switch(action.type){
@@ -59,6 +60,12 @@ const _destroyStudent = (studentId) => ({
   studentId
 })
 
+const _updateStudent = (update) => ({
+  type: UPDATE_STUDENT,
+  update
+})
+
+
 const getSchools = ()=> {
   return async(dispatch)=> {
     const res = await axios.get('/api/schools');
@@ -83,12 +90,24 @@ const createStudent = student => {
 const destroyStudent = studentId => {
   console.log(studentId)
   return async(dispatch) => {
-    await axios.delete('/api/students/', studentId);
+    await axios.delete(`/api/students/${studentId}`);
     dispatch(_destroyStudent(studentId));
   };
 };
 
+const updateStudent = update => {
+  return async (dispatch) => {
+  try {
+    const res = await axios.put( `/api/students/${update.studentId}`, { update} );
+    const _res = res.data;
+    dispatch( _updateStudent(_res));
+  } catch(err){
+      console.log(error)
+  }
+}
+}
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
-export { getSchools, getStudents, createStudent, destroyStudent };
+export { getSchools, getStudents, createStudent, destroyStudent, updateStudent };
