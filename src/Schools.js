@@ -13,6 +13,7 @@ const Schools = (schools) => {
         <br />
         <select name='addStudent'>
               <option>Add Student</option>
+              {schools.students.students.map(student => <option>{student.firstName} {student.lastName}</option>)}
             </select>
         </li>)
       }

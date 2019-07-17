@@ -32,11 +32,11 @@ const studentsReducer = (state = initialState, action) => {
       return { ...state, students: newStudents }
     case UPDATE_STUDENT:
       const updatedStudents = state.students.map(student => {
-        student.id === action.data.studentId
-          ? { ...student, schoolId: action.data.schoolId }
+        student.id === action.update.studentId
+          ? { ...student, schoolId: action.update.schoolId }
           : student;
       });
-      return state = { ...state, updatedStudents };
+      return {...state, students: updatedStudents };
     default:
       return state
   }
@@ -101,9 +101,9 @@ const destroyStudent = studentId => {
   };
 };
 
-const updateStudent = (studentId, schoolId) => {
+const updateStudent = update => {
   return async (dispatch) => {
-    const res = await axios.put(`/api/students/${studentId}`, schoolId);
+    const res = await axios.put(`/api/students/${update.studentId}`, update.schoolId);
     dispatch(_updateStudent(res.data));
   }
 }

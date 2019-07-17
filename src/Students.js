@@ -31,11 +31,10 @@ const Students = ({schools, students, deleteStudent, enrollStudent}) => {
   );
 };
 
-const mapStateToProps = ({ schools, students, match})=> {
+const mapStateToProps = ({ schools, students})=> {
     return {
       students,
-      schools,
-      match
+      schools
     }
 };
 

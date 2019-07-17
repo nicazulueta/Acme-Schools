@@ -51,12 +51,13 @@ app.delete(`/api/students/:id`, async (req, res, next) => {
 
 app.put('/api/students/:id', async (req, res, next) => {
     try {
-        const updatedStudent = await Student.update({schoolId: req.body.schoolId}, {
+        console.log(req.body)
+        await Student.update({schoolId: req.body}, {
           where: {
             id: req.params.id
           }
         });
-        res.send(updatedStudent);
+        res.send(req.params.id);
       } catch (err) {
         console.error(err);
       }
