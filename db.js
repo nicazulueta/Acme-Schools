@@ -104,7 +104,9 @@ const syncAndSeed = async() => {
   }
 };
 
-syncAndSeed();
+if(process.env.SYNC){
+	syncAndSeed();
+ }
 
 module.exports = {
   conn,

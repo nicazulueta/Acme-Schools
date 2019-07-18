@@ -4,7 +4,9 @@ const path = require('path');
 const port = process.env.PORT || 3000;
 const { syncAndSeed, School, Student } = require('./db');
 
-syncAndSeed();
+if(process.env.SYNC){
+	syncAndSeed();
+ }
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')))
 app.use(express.json());
