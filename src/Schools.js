@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 const Schools = ({schools, students}) => {
   let count;
   return (
-    <ul>
+    <div id='school-list'>
+      <ul>
       {
         schools.schools.map(school => <li key={school.id}>
           <Link to={`/schools/${school.id}`}>{school.name}</Link>
@@ -13,7 +14,8 @@ const Schools = ({schools, students}) => {
           Student Count: {(students.students.filter(student => {return student.schoolId === school.id})).length}
           </li>
       )}
-    </ul>
+      </ul>
+    </div>
   );
 };
 
