@@ -7,7 +7,8 @@ const { syncAndSeed, School, Student } = require('./db');
 syncAndSeed();
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')))
-app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 
 app.get('/api/schools', async (req, res, next) => {
     try {
