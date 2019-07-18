@@ -32,7 +32,7 @@ const studentsReducer = (state = initialState, action) => {
       return { ...state, students: newStudents }
     case UPDATE_STUDENT:
       const updatedStudents = state.students.map(student => {
-        student.id === action.update.studentId
+        return student.id === action.update.studentId
           ? { ...student, schoolId: action.update.schoolId }
           : student;
       });

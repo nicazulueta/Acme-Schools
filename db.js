@@ -44,12 +44,10 @@ const School = conn.define('school', {
   id: {
     primaryKey: true,
     type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
-    allowNull: false
+    defaultValue: Sequelize.UUIDV4
   },
   name: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   imageURL: {
     type: Sequelize.STRING
@@ -60,27 +58,22 @@ const Student = conn.define('student', {
   id: {
     primaryKey: true,
     type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
-    allowNull: false
+    defaultValue: Sequelize.UUIDV4
   },
   firstName: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   lastName: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   email: {
     type: Sequelize.STRING,
-    allowNull: false,
     validate: {
       isEmail: true
     }
   },
   gpa: {
-    type: Sequelize.STRING,
-    allowNull: false,
+    type: Sequelize.STRING
   }
 });
 
@@ -107,7 +100,7 @@ const syncAndSeed = async() => {
       }))
     )
   } catch (err) {
-    console.error(error)
+    console.error(err)
   }
 };
 

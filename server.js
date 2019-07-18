@@ -7,7 +7,7 @@ const { syncAndSeed, School, Student } = require('./db');
 syncAndSeed();
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')))
-app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.get('/api/schools', async (req, res, next) => {
     try {
@@ -51,13 +51,13 @@ app.delete(`/api/students/:id`, async (req, res, next) => {
 
 app.put('/api/students/:id', async (req, res, next) => {
     try {
-        console.log(req.body)
-        await Student.update({schoolId: req.body}, {
+        const _reqBody = Object.keys(req.body)[0];
+        await Student.update({schoolId: _reqBody}, {
           where: {
             id: req.params.id
           }
         });
-        res.send(req.params.id);
+        res.send({studentId: req.params.id, schoolId: _reqBody});
       } catch (err) {
         console.error(err);
       }
