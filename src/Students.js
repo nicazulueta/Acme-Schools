@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { destroyStudent, updateStudent } from './store'
 
 const Students = ({schools, students, deleteStudent, enrollStudent}) => {
-  console.log(students.students)
   return (
     <ul>
       {

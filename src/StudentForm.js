@@ -50,13 +50,6 @@ class StudentForm extends React.Component {
             <input type='text' name='gpa' value={this.state.gpa} onChange={this.handleChange} />
           </label>
           <br />
-          <label>
-            Enroll at
-            <select name='enrollAt' value={this.state.enrollAt} onChange={this.handleChange}>
-              <option>Not Enrolled</option>
-            </select>
-          </label>
-          <br />
           <button type='submit'>Submit</button>
         </form>
       </div>

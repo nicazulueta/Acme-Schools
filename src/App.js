@@ -22,7 +22,7 @@ class App extends React.Component {
             <Route path='/' component={ Header} />
             <Route path='/' component={ StudentForm } />
             <Route exact path='/schools' component={ Schools} />
-            <Route exact path='/schools/:id' component={ SingleSchool } />
+            <Route exact path='/schools/:id' component={SingleSchool} />
             <Route exact path='/students' component={Students} />
             <Route exact path='/' component={ Home } />
           </HashRouter>
