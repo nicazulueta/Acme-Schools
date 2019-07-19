@@ -55,6 +55,14 @@ app.delete(`/api/students/:id`, async (req, res, next) => {
 app.put('/api/students/:id', async (req, res, next) => {
   try {
     const _reqBody = Object.keys(req.body)[0];
+    if (_reqBody === 'Not Enrolled') {
+      await Student.update({ schoolId: null }, {
+        where: {
+          id: req.params.id
+        }
+      });
+      res.send({ studentId: req.params.id, schoolId: _reqBody });
+    }
     await Student.update({ schoolId: _reqBody }, {
       where: {
         id: req.params.id

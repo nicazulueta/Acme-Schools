@@ -52,7 +52,7 @@ function Home ({schools, students}) {
             <li>Enroll student on creation / on school pages</li>
             <li>Add validation and other error handling</li>
             <li>Permanently save data to the database</li>
-            <li>Actually make it look nice (in Prof's words: "it's not going to win any style awards")</li>
+            <li>Fix CSS - my file is getting an error so no CSS is being applied right now :(</li>
           </ul>
       </div>
     </div>
